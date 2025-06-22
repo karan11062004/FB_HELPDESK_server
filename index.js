@@ -20,7 +20,16 @@ mongoose
   .catch(err => console.error('MongoDB connection error:', err));
 
 // 2) Global middleware
-app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://fb-helpdesk-client.vercel.app'
+];
+
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true,
+}));
+
 app.use(express.json()); // parse JSON bodies
 
 // 3) Routes
